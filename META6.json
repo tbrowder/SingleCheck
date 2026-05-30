@@ -1,0 +1,25 @@
+{
+  "auth": "zef:tbrowder",
+  "authors": [
+    "Tom Browder"
+  ],
+  "build-depends": [
+  ],
+  "depends": [
+  ],
+  "description": "Provides examples of checks produced by module B<Checkwriter> which\nis a work in progress.\n",
+  "license": "Artistic-2.0",
+  "name": "SampleCheck",
+  "perl": "6.d",
+  "provides": {
+    "SampleCheck": "lib/SampleCheck.rakumod"
+  },
+  "resources": [
+  ],
+  "source-url": "",
+  "tags": [
+  ],
+  "test-depends": [
+  ],
+  "version": "0.0.1"
+}
