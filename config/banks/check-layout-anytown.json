@@ -1,0 +1,115 @@
+{
+  "page": {
+    "width": 432,
+    "height": 198
+  },
+  "fonts": {
+    "info": 9,
+    "label": 8,
+    "field": 11,
+    "amount_box": 12,
+    "legal": 10,
+    "micr": 12,
+    "watermark": 22
+  },
+  "lines": {
+    "stroke": 0.5
+  },
+  "positions": {
+    "addr_block": {
+      "x": 22,
+      "y": 22,
+      "leading": 11
+    },
+    "check_number": {
+      "x": 392,
+      "y": 24
+    },
+    "date_label": {
+      "x": 318,
+      "y": 46
+    },
+    "date_line": {
+      "x": 352,
+      "y": 46,
+      "w": 64
+    },
+    "payee_label": {
+      "x": 22,
+      "y": 72
+    },
+    "payee_line": {
+      "x": 100,
+      "y": 72,
+      "w": 280
+    },
+    "amount_box": {
+      "x": 386,
+      "y": 70,
+      "w": 44,
+      "h": 16
+    },
+    "legal_line": {
+      "x": 22,
+      "y": 100,
+      "w": 362
+    },
+    "dollars_word": {
+      "x": 388,
+      "y": 100
+    },
+    "bank_info": {
+      "x": 22,
+      "y": 130
+    },
+    "memo_label": {
+      "x": 22,
+      "y": 150
+    },
+    "memo_line": {
+      "x": 50,
+      "y": 150,
+      "w": 230
+    },
+    "signature_line": {
+      "x": 292,
+      "y": 150,
+      "w": 120
+    },
+    "logo_box": {
+      "x": 22,
+      "y": 50,
+      "w": 40,
+      "h": 20
+    },
+    "micr": {
+      "baseline_from_bottom": 16
+    }
+  },
+  "watermark": {
+    "text": "HANCOCK WHITNEY",
+    "angle": 30,
+    "opacity": 0.15,
+    "size": 22,
+    "x": 96,
+    "y": 112
+  },
+  "overlays": {
+    "logo": {
+      "enabled": false,
+      "path": "assets/hancock-logo.png",
+      "x": 22,
+      "y": 50,
+      "w": 40,
+      "h": 20
+    },
+    "signature": {
+      "enabled": true,
+      "path": "assets/signature.png",
+      "x": 292,
+      "y": 148,
+      "w": 120,
+      "h": 18
+    }
+  }
+}
