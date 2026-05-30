@@ -13,12 +13,9 @@
   "perl": "6.d",
   "provides": {
     "SingleCheck": "lib/SingleCheck.rakumod",
-    "SingleCheck::Action": "lib/SingleCheck/Action.rakumod",
-    "SingleCheck::Data": "lib/SingleCheck/Data.rakumod",
     "SingleCheck::FontUtils": "lib/SingleCheck/FontUtils.rakumod",
     "SingleCheck::Handlers": "lib/SingleCheck/Handlers.rakumod",
     "SingleCheck::PayTo": "lib/SingleCheck/PayTo.rakumod",
-    "SingleCheck::Template": "lib/SingleCheck/Template.rakumod",
     "SingleCheck::Utils": "lib/SingleCheck/Utils.rakumod",
     "SingleCheck::Vars": "lib/SingleCheck/Vars.rakumod"
   },

@@ -2,14 +2,14 @@ use Test;
 
 my @modules = [
    "SingleCheck",
-   "SingleCheck::Handlers",
-   "SingleCheck::Utils",
-   "SingleCheck::PayTo",
-   "SingleCheck::Action",
-   "SingleCheck::Data",
-   "SingleCheck::Vars",
-   "SingleCheck::Template",
+#  "SingleCheck::Action",
+#  "SingleCheck::Data",
    "SingleCheck::FontUtils",
+   "SingleCheck::Handlers",
+   "SingleCheck::PayTo",
+#  "SingleCheck::Template",
+   "SingleCheck::Utils",
+   "SingleCheck::Vars",
 ];
 
 plan @modules.elems;
