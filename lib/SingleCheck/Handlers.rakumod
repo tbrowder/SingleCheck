@@ -1,4 +1,4 @@
-unit module SampleCheck::Handlers;
+unit module SingleCheck::Handlers;
 
 #=== exported subs ===
 # Receives a path to the user's register.json file

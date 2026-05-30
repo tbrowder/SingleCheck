@@ -1,29 +1,33 @@
-NAME
-====
+TITLE
+=====
 
-**SampleCheck** - Provides examples of checks produced by module **Checkwriter** which is a work in progress.
+Checkwriter::SampleCheck — Mi6-managed check templates
 
-SYNOPSIS
+SUBTITLE
 ========
 
-```raku
-use SampleCheck;
-```
+JSON-driven personal check rendering using PDF::Lite (Raku)
 
-DESCRIPTION
+Synopsis
+========
+
+    zef install PDF::Lite JSON::Fast
+    export CHECKWRITER_ASSETS=$PWD   # optional, for assets/fonts lookup
+    raku bin/make-fidelity-check.raku
+    raku bin/make-hancock-check.raku
+
+Description
 ===========
 
-**SampleCheck** is ...
+**Checkwriter::SampleCheck** renders printable personal checks (6.00" x 2.75", 432x198 pt) as PDF using [PDF::Lite](PDF::Lite). Layout, watermark, overlays, and MICR baseline are configured via JSON files under `config/banks/`.
 
-AUTHOR
+Bank Styles
+===========
+
+* Fidelity Investments (logo block at left; payee/date shifted right) * Hancock Whitney (classic layout; larger amount box)
+
+Safety
 ======
 
-Tom Browder <tbrowder@acm.org>
-
-COPYRIGHT AND LICENSE
-=====================
-
-© 2026 Tom Browder
-
-This library is free software; you may redistribute it or modify it under the Artistic License 2.0.
+Ships with fictional data and a visible MICR placeholder font by default. To print real checks, follow your bank's rules and use required materials.
 

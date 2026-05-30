@@ -1,4 +1,4 @@
-unit module SampleCheck::Template;
+unit module SinhleCheck::Template;
 
 =finish
 

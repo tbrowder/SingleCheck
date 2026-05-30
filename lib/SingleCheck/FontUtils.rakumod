@@ -1,4 +1,4 @@
-unit module SampleCheck::FontUtils;
+unit module SingleCheck::FontUtils;
 
 use PDF::API6;
 use PDF::Lite;

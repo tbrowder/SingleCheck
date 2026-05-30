@@ -1,4 +1,4 @@
-unit module SampleCheck::Utils;
+unit module SinhleCheck::Utils;
 
 use JSON::Hjson;
 use JSON::Fast;

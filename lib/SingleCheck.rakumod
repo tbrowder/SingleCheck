@@ -1,11 +1,11 @@
-unit module SampleCheck;
+unit module SingleCheck;
 
 use PDF::API6;
 use PDF::Page;
 use PDF::Font::Loader :load-font;
 use PDF::Content::FontObj;
 use JSON::Fast;
-use SampleCheck::FontUtils;
+use SingleCheck::FontUtils;
 
 sub _pdf-y($page, $y) { $page.height - $y }
 

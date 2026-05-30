@@ -9,14 +9,22 @@
   ],
   "description": "Provides examples of checks produced by module B<Checkwriter> which\nis a work in progress.\n",
   "license": "Artistic-2.0",
-  "name": "SampleCheck",
+  "name": "SingleCheck",
   "perl": "6.d",
   "provides": {
-    "SampleCheck": "lib/SampleCheck.rakumod"
+    "SingleCheck": "lib/SingleCheck.rakumod",
+    "SingleCheck::Action": "lib/SingleCheck/Action.rakumod",
+    "SingleCheck::Data": "lib/SingleCheck/Data.rakumod",
+    "SingleCheck::FontUtils": "lib/SingleCheck/FontUtils.rakumod",
+    "SingleCheck::Handlers": "lib/SingleCheck/Handlers.rakumod",
+    "SingleCheck::PayTo": "lib/SingleCheck/PayTo.rakumod",
+    "SingleCheck::Template": "lib/SingleCheck/Template.rakumod",
+    "SingleCheck::Utils": "lib/SingleCheck/Utils.rakumod",
+    "SingleCheck::Vars": "lib/SingleCheck/Vars.rakumod"
   },
   "resources": [
   ],
-  "source-url": "",
+  "source-url": "https://github.com/tbrowder/SingleCheck.git",
   "tags": [
   ],
   "test-depends": [

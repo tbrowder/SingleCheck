@@ -1,4 +1,4 @@
-unit module SampleCheck::Vars;
+unit module SingleCheck::Vars;
 
 constant $NFIELDS is export = 22;
 

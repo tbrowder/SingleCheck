@@ -1,15 +1,15 @@
 use Test;
 
 my @modules = [
-   "SampleCheck",
-   "SampleCheck::Handlers",
-   "SampleCheck::Utils",
-   "SampleCheck::PayTo",
-   "SampleCheck::Action",
-   "SampleCheck::Data",
-   "SampleCheck::Vars",
-   "SampleCheck::Template",
-   "SampleCheck::FontUtils",
+   "SingleCheck",
+   "SingleCheck::Handlers",
+   "SingleCheck::Utils",
+   "SingleCheck::PayTo",
+   "SingleCheck::Action",
+   "SingleCheck::Data",
+   "SingleCheck::Vars",
+   "SingleCheck::Template",
+   "SingleCheck::FontUtils",
 ];
 
 plan @modules.elems;

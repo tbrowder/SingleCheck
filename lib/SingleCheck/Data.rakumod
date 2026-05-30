@@ -1,4 +1,4 @@
-unit module SampleCheck::Data;
+unit module SingleCheck::Data;
 
 =begin comment
 our @resources-list is export = <

@@ -1,4 +1,4 @@
-unit module SampleCheck::Action;
+unit module SingleCheck::Action;
 
 =finish
 

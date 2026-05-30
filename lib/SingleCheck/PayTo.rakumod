@@ -1,4 +1,4 @@
-unit module SampleCheck::PayTo;
+unit module SingleCheck::PayTo;
 
 use Checkwriter;
 
