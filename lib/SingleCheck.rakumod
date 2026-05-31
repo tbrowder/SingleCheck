@@ -7,7 +7,12 @@ use PDF::Content::FontObj;
 use JSON::Fast;
 use SingleCheck::FontUtils;
 
-sub _pdf-y($page, $y) { $page.height - $y }
+# adjust vertical setting by using
+# origin at top-left corner of
+# the page and positive y down
+sub _pdf-y($page, $y) { 
+    $page.height - $y 
+}
 
 sub _hline($page, :$x!, :$y!, :$w!, :$stroke = 0.5) {
     $page.graphics: {
@@ -47,11 +52,11 @@ sub load-layout(Str $path --> Hash:D) is export(:load-layout) {
     from-json $path.IO.slurp;
 }
 
-
 sub render-check(
     Str :$outfile!, # = "output/sample-check.pdf",
     Hash :$layout!,
          :%data!,
+         :$debug,
 
 =begin comment
     :%data = Hash[Str,Str].new(
@@ -220,9 +225,25 @@ sub render-check(
     # MICR placeholder (Courier). Adjust baseline with positions.micr.baseline_from_bottom
     my $micr = ":{$%data<micr_routing>}:{$%data<micr_account>} {$%data<micr_checkno>}";
     my $baseline = %p<micr><baseline_from_bottom> // 16;
-    my $cour = get-font $pdf, :core-font('Courier');
+    
+    # check for access to micre fonts
+    my $mfont;
+    my $ffil = "$*HOME/.SingleCheck/font-files.list";
+    if $ffil.IO.e {
+        # read to find the mfont path
+        for $ffil.IO.line -> $line is rw {
+        }
+        if 1 or $debug {
+            say "DEBUG: found micre font file: '$ffil'";
+        }
+    }
+    else {
+        # alternate font
+        $mfont = get-font $pdf, :core-font('Courier');
+    }
+
     $page.text: {
-        .font = $cour, %f<micr>;
+        .font = $mfont, %f<micr>;
         .text-position = 18, $baseline;
         .say: $micr;
     }
