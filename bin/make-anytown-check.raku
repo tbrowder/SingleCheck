@@ -19,6 +19,7 @@ my %data = %(
         date => "08/19/2025",
         payee => "Water Works",
         amount_num => "\$ 88.20",
+
         amount_words => "Eighty-eight and 20/100", # should use the lingua module
         memo => "Acct 778899",
         micr_checkno => "2042" # for real checks this must be unique

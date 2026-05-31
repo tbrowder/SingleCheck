@@ -10,23 +10,16 @@ use SingleCheck::FontUtils;
 sub _pdf-y($page, $y) { $page.height - $y }
 
 sub _hline($page, :$x!, :$y!, :$w!, :$stroke = 0.5) {
-#sub _hline($page, :$x!, :$y!, :$w!, :$lw = 0.5) {
     $page.graphics: {
-        #.line-width = $stroke; 
         .LineWidth = $stroke; 
-        #.line-width = $lw;
-        #.move-to($x, _pdf-y($page, $y)); .line-to($x + $w, _pdf-y($page, $y));
         .MoveTo($x, _pdf-y($page, $y)); .LineTo($x + $w, _pdf-y($page, $y));
-        #.stroke;
         .Stroke;
     }
 }
 
 sub _rect($page, :$x!, :$y!, :$w!, :$h!, :$stroke = 0.5) {
-#sub _rect($page, :$x!, :$y!, :$w!, :$h!, :$lw = 0.5) {
     $page.graphics: {
         .LineWidth = $stroke;
-        #.line-width = $lw;
         .Rectangle($x, _pdf-y($page, $y) - $h, $w, $h);
         .Stroke;
     }
@@ -41,15 +34,11 @@ sub _text(
     :$size = 10,
 ) {
     my $f = get-font($pdf, :$core-font);
-    #my $f = $page.load-font($font);
     $page.text: {
-        #.font($f, $size);
         .font = $f, $size;
 
-        #.move-text-position($x, _pdf-y($page, $y));
         .text-position = $x, _pdf-y($page, $y);
 
-        #.show-text($txt);
         .say: $txt;
     }
 }
@@ -62,9 +51,7 @@ sub load-layout(Str $path --> Hash:D) is export(:load-layout) {
 sub render-check(
     Str :$outfile!, # = "output/sample-check.pdf",
     Hash :$layout!,
-    #Hash[Str,Str]  :%data!,
-    #Hash :%data!,
-          :%data!,
+         :%data!,
 
 =begin comment
     :%data = Hash[Str,Str].new(
@@ -151,33 +138,52 @@ sub render-check(
     my $ay = %p<addr_block><y>;
     my $leading = %p<addr_block><leading> // 11;
     for ($%data<addr1>, $%data<addr2>, $%data<addr3>).grep(*.so).kv -> $i, $line {
-        _text($pdf, $page, $line, :x($ax), :y($ay + $i * $leading), :core-font('Helvetica'), :size(%f<info>));
+        _text($pdf, $page, $line, 
+              :x($ax), :y($ay + $i * $leading), :core-font('Helvetica'), :size(%f<info>)
+             );
     }
 
     # headings and lines
-    _text($pdf, $page, $%data<check_number>, :x(%p<check_number><x>), :y(%p<check_number><y>), :core-font('Helvetica'), :size(%f<field>));
-    _text($pdf, $page, "Date:", :x(%p<date_label><x>), :y(%p<date_label><y>), :core-font('Times-Roman'), :size(%f<label>));
-    _hline($page, :x(%p<date_line><x>), :y(%p<date_line><y>), :w(%p<date_line><w>), :stroke(%ln<stroke> // 0.5));
+    _text($pdf, $page, $%data<check_number>, :x(%p<check_number><x>), :y(%p<check_number><y>), 
+          :core-font('Helvetica'), :size(%f<field>));
+    _text($pdf, $page, "Date:", :x(%p<date_label><x>), :y(%p<date_label><y>), 
+          :core-font('Times-Roman'), :size(%f<label>));
+    _hline($page, :x(%p<date_line><x>), :y(%p<date_line><y>), :w(%p<date_line><w>), 
+           :stroke(%ln<stroke> // 0.5));
 
-    _text($pdf, $page, "Pay to the Order of", :x(%p<payee_label><x>), :y(%p<payee_label><y>), :core-font('Times-Roman'), :size(%f<label>));
-    _hline($page, :x(%p<payee_line><x>), :y(%p<payee_line><y>), :w(%p<payee_line><w>), :stroke(%ln<stroke> // 0.5));
+    _text($pdf, $page, "Pay to the Order of", :x(%p<payee_label><x>), :y(%p<payee_label><y>), 
+          :core-font('Times-Roman'), :size(%f<label>));
+    _hline($page, :x(%p<payee_line><x>), :y(%p<payee_line><y>), :w(%p<payee_line><w>), 
+           :stroke(%ln<stroke> // 0.5));
 
-    _rect($page, :x(%p<amount_box><x>), :y(%p<amount_box><y>), :w(%p<amount_box><w>), :h(%p<amount_box><h>), :stroke(%ln<stroke> // 0.5));
+    _rect($page, :x(%p<amount_box><x>), :y(%p<amount_box><y>), :w(%p<amount_box><w>), 
+          :h(%p<amount_box><h>), :stroke(%ln<stroke> // 0.5));
 
-    _hline($page, :x(%p<legal_line><x>), :y(%p<legal_line><y>), :w(%p<legal_line><w>), :stroke(%ln<stroke> // 0.5));
-    _text($pdf, $page, "Dollars", :x(%p<dollars_word><x>), :y(%p<dollars_word><y>), :core-font('Times-Roman'), :size(%f<label>));
+    _hline($page, :x(%p<legal_line><x>), :y(%p<legal_line><y>), :w(%p<legal_line><w>), 
+           :stroke(%ln<stroke> // 0.5));
+    _text($pdf, $page, "Dollars", :x(%p<dollars_word><x>), :y(%p<dollars_word><y>), 
+          :core-font('Times-Roman'), :size(%f<label>));
 
-    _text($pdf, $page, $%data<bank_info>, :x(%p<bank_info><x>), :y(%p<bank_info><y>), :core-font('Helvetica'), :size(%f<info>));
+    _text($pdf, $page, $%data<bank_info>, :x(%p<bank_info><x>), :y(%p<bank_info><y>), 
+          :core-font('Helvetica'), :size(%f<info>));
 
-    _text($pdf, $page, "For", :x(%p<memo_label><x>), :y(%p<memo_label><y>), :core-font('Times-Roman'), :size(%f<label>));
-    _hline($page, :x(%p<memo_line><x>), :y(%p<memo_line><y>), :w(%p<memo_line><w>), :stroke(%ln<stroke> // 0.5));
-    _hline($page, :x(%p<signature_line><x>), :y(%p<signature_line><y>), :w(%p<signature_line><w>), :stroke(%ln<stroke> // 0.5));
+    _text($pdf, $page, "For", :x(%p<memo_label><x>), :y(%p<memo_label><y>), 
+          :core-font('Times-Roman'), :size(%f<label>));
+    _hline($page, :x(%p<memo_line><x>), :y(%p<memo_line><y>), :w(%p<memo_line><w>), 
+           :stroke(%ln<stroke> // 0.5));
+    _hline($page, :x(%p<signature_line><x>), :y(%p<signature_line><y>), 
+           :w(%p<signature_line><w>), :stroke(%ln<stroke> // 0.5));
 
-    _text($pdf, $page, $%data<payee>, :x(%p<payee_line><x> + 2), :y(%p<payee_line><y> - 2), :core-font('Helvetica'), :size(%f<field>));
-    _text($pdf, $page, $%data<amount_num>, :x(%p<amount_box><x> + 4), :y(%p<amount_box><y> - 2), :core-font('Helvetica-Bold'), :size(%f<amount_box>));
-    _text($pdf, $page, $%data<amount_words>, :x(%p<legal_line><x> + 2), :y(%p<legal_line><y> - 2), :core-font('Helvetica'), :size(%f<field>));
-    _text($pdf, $page, $%data<memo>, :x(%p<memo_line><x> + 2), :y(%p<memo_line><y> - 2), :core-font('Helvetica'), :size(%f<field>));
-    _text($pdf, $page, $%data<date>, :x(%p<date_line><x> + 2), :y(%p<date_line><y> - 2), :core-font('Helvetica'), :size(%f<field>));
+    _text($pdf, $page, $%data<payee>, :x(%p<payee_line><x> + 2), :y(%p<payee_line><y> - 2), 
+          :core-font('Helvetica'), :size(%f<field>));
+    _text($pdf, $page, $%data<amount_num>, :x(%p<amount_box><x> + 4), :y(%p<amount_box><y> - 2),
+           :core-font('Helvetica-Bold'), :size(%f<amount_box>));
+    _text($pdf, $page, $%data<amount_words>, :x(%p<legal_line><x> + 2), 
+          :y(%p<legal_line><y> - 2), :core-font('Helvetica'), :size(%f<field>));
+    _text($pdf, $page, $%data<memo>, :x(%p<memo_line><x> + 2), :y(%p<memo_line><y> - 2), 
+          :core-font('Helvetica'), :size(%f<field>));
+    _text($pdf, $page, $%data<date>, :x(%p<date_line><x> + 2), :y(%p<date_line><y> - 2), 
+          :core-font('Helvetica'), :size(%f<field>));
 
     # overlays: draw image if available, else a labeled guide box
     for <logo signature> -> $k {
@@ -206,7 +212,8 @@ sub render-check(
 
         if !$drawn {
             _rect($page, :x($x), :y($y), :w($w), :h($h));
-            _text($pdf, $page, uc($k) ~ " HERE", :x($x + 2), :y($y + $h - 4), :core-font('Helvetica'), :size(6));
+            _text($pdf, $page, uc($k) ~ " HERE", :x($x + 2), :y($y + $h - 4), 
+                  :core-font('Helvetica'), :size(6));
         }
     }
 
