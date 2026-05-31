@@ -5,6 +5,7 @@ use PDF::Page;
 use PDF::Font::Loader :load-font;
 use PDF::Content::FontObj;
 use JSON::Fast;
+use Text::Utils :strip-comment;
 use SingleCheck::FontUtils;
 
 # adjust vertical setting by using
@@ -232,6 +233,8 @@ sub render-check(
     if $ffil.IO.e {
         # read to find the mfont path
         for $ffil.IO.line -> $line is rw {
+            $line = strip-comment $line;
+            next unless $line ~~ /\S/;
         }
         if 1 or $debug {
             say "DEBUG: found micre font file: '$ffil'";
