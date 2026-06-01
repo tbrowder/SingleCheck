@@ -3,7 +3,7 @@ unit module SingleCheck;
 use PDF::API6;
 use PDF::Page;
 use PDF::Font::Loader :load-font;
-use PDF::Content::FontObj;
+u]se PDF::Content::FontObj;
 use JSON::Fast;
 use Text::Utils :strip-comment;
 use SingleCheck::FontUtils;
@@ -228,26 +228,44 @@ sub render-check(
     my $baseline = %p<micr><baseline_from_bottom> // 16;
     
     # check for access to micre fonts
-    my $mfont;
-    my $ffil = "$*HOME/.SingleCheck/font-files.list";
+    my ($mfont, $mfil);
+    my $ffil = "$*HOME/\.SingleCheck/font-files\.list".IO // '';
     if $ffil.IO.e {
         # read to find the mfont path
-        for $ffil.IO.line -> $line is rw {
+        if 1 or $debug {
+            say "DEBUG: found user's list of font files: '$ffil'";
+        }
+        my ($code);
+        for $ffil.IO.lines -> $line is copy {
             $line = strip-comment $line;
             next unless $line ~~ /\S/;
+            # two parts
+            # code font-file-path
+            my @words = $line.words;
+            $code = @words.head;
+            $mfil = @words.tail;
+            
         }
         if 1 or $debug {
-            say "DEBUG: found micre font file: '$ffil'";
+            say "DEBUG: found micre font file: '$mfil'";
         }
+        $mfont = get-font $pdf, :font-file($mfil);
     }
     else {
+        if 1 or $debug {
+            say "DEBUG: did not find micre font file";
+        }
         # alternate font
         $mfont = get-font $pdf, :core-font('Courier');
     }
 
+    if 1 or $debug {
+        say "DEBUG: \$micr text: '$micr'";
+    }
+
     $page.text: {
         .font = $mfont, %f<micr>;
-        .text-position = 18, $baseline;
+        .text-position = 16, $baseline;
         .say: $micr;
     }
 
