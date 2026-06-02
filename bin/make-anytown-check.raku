@@ -11,7 +11,7 @@ my %data = %(
         addr2 => "123 MAIN STREET",
         addr3 => "ANYTOWN, USA 99999",
         micr_routing => "000000000",
-        micr_account => "000000000000",
+        micr_account => "0000000000",
         bank_info => "ANYTOWN CITY BANK",
         
         # data varying per check

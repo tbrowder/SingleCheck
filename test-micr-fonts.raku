@@ -14,7 +14,7 @@ my $mpath = "/home/tbrowde/mydata/tbrowde-home/Monotype-MyFonts/MICR/MICRStd.otf
 class Mtext {
     has Str $.routing = "123456789";
     has Str $.account = "0123456789";
-    has Int $.number;
+    has Int $.number is rw = 1000 ;
 }
 
 sub print-micre-line-style1(
@@ -56,19 +56,19 @@ sub print-micre-line-style1(
 
         # print the first chunk
         .text-position = $x, $y;
-        @box = .say: $mtext1;
+        @box = .print: $mtext1;
         say "DEBUG: starting x = {@box[0]}" if 0 or $debug;
         say "DEBUG: ending   x = {@box[2]}" if 0 or $debug;
         $x = @box[2] + $d1; 
 
         # print the second chunk
         .text-position = $x, $y;
-        @box = .say: $mtext2;
+        @box = .print: $mtext2;
         $x = @box[2] + $d2; 
 
         # print the third chunk
         .text-position = $x, $y;
-        @box = .say: $mtext3;
+        @box = .print: $mtext3;
     }
 }
 

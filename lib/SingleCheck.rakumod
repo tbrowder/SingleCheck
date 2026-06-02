@@ -3,7 +3,7 @@ unit module SingleCheck;
 use PDF::API6;
 use PDF::Page;
 use PDF::Font::Loader :load-font;
-u]se PDF::Content::FontObj;
+use PDF::Content::FontObj;
 use JSON::Fast;
 use Text::Utils :strip-comment;
 use SingleCheck::FontUtils;
@@ -72,7 +72,7 @@ sub render-check(
         memo => "",
         bank_info => "LOCAL BANK, ANYTOWN, USA",
         micr_routing => "000000000",
-        micr_account => "000000000000",
+        micr_account => "0000000000",
         micr_checkno => "1001"
     ),
 =end comment
