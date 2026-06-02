@@ -8,6 +8,4 @@ Ensure each printed check has a unique check number.
 may if the sequence is "reasonable", i.e., in order
 with minor gaps should be okay.)
 
-)
-
-
+Integrate the new micr line subroutine.
