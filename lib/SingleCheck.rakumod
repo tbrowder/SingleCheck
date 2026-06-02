@@ -98,7 +98,7 @@ sub render-check(
     # light background
     $page.graphics: {
         #.fill-color(0.98, 0.99, 1.0);
-        .rectangle(0, 0, $page.width, $page.height);
+        .Rectangle(0, 0, $page.width, $page.height);
         .fill;
     }
 =end comment
