@@ -4,73 +4,9 @@ use PDF::Lite;
 use PDF::Font::Loader :load-font;
 use PDF::Content::FontObj;
 
-constant MICR-TRANSIT = chr(0x2446);
-constant MICR-ON-US   = chr(0x2447);
-constant MICR-AMOUNT  = chr(0x2448);
-constant MICR-DASH    = chr(0x2449);
-
 my $mpath = "/home/tbrowde/mydata/tbrowde-home/Monotype-MyFonts/MICR/MICRStd.otf";
 
-class Mtext {
-    has Str $.routing = "123456789";
-    has Str $.account = "0123456789";
-    has Int $.number is rw = 1000 ;
-}
-
-sub print-micre-line-style1(
-    # The defaults for the prefix and suffix characters are for one known use case
-    # for a personal checking account.
-    # other styles may print the parts in a different order and require a different
-    # subroutine.
-
-    # the defaults for the enclosed numbers are place holders for testing
-    #                           prefix                suffix
-    :$routing = "123456789",    :$rp = MICR-TRANSIT, :$rs = MICR-TRANSIT,
-    :$account = "000123456789", :$ap = "",           :$as = MICR-AMOUNT,
-    :$number  = "1234",         :$np = "",           :$ns = "",
-
-    :$pdf!, :$page!,
-    :$font-path!, 
-    :$font-size = 12, 
-    :$x! is rw, :$y!, # starting point for the text line
-                #   where y is the distance from the TOP of the page
-    :$d1 = 36,  # distance between routing and account
-
-    :$d2 = 42,  # distance between account and check number
-    :$box = False, # if True, put a box around the text line
-    :$debug = False;
-
-) is export {
-    # given a path to a micre font, a font size, and other info, print 
-    # a micr check line
-
-    my $micr-font = load-font(:file($font-path));
-    # build the micre line
-    my $mtext1 = $rp ~ $routing ~ $rs;
-    my $mtext2 = $ap ~ $account ~ $as;
-    my $mtext3 = $np ~ $number  ~ $ns;
-
-    my @box;
-    $page.text: {
-        .font = $micr-font, $font-size;
-
-        # print the first chunk
-        .text-position = $x, $y;
-        @box = .print: $mtext1;
-        say "DEBUG: starting x = {@box[0]}" if 0 or $debug;
-        say "DEBUG: ending   x = {@box[2]}" if 0 or $debug;
-        $x = @box[2] + $d1; 
-
-        # print the second chunk
-        .text-position = $x, $y;
-        @box = .print: $mtext2;
-        $x = @box[2] + $d2; 
-
-        # print the third chunk
-        .text-position = $x, $y;
-        @box = .print: $mtext3;
-    }
-}
+use SingleCheck;
 
 #my PDF::Content::FontObj $micr-font = load-font(:file($mpath));
 
