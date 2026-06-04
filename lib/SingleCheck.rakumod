@@ -23,18 +23,21 @@ sub _pdf-y($page, $y) {
 sub _hline($page, :$x!, :$y!, :$w!, :$stroke = 0.5) {
     $page.graphics: {
         .LineWidth = $stroke; 
-        .MoveTo($x, _pdf-y($page, $y)); .LineTo($x + $w, _pdf-y($page, $y));
+        .MoveTo($x, _pdf-y($page, $y)); 
+        .LineTo($x + $w, _pdf-y($page, $y));
         .Stroke;
     }
-}
+} # end of sub _hline
 
 sub _rect($page, :$x!, :$y!, :$w!, :$h!, :$stroke = 0.5) {
+    # the rectangle is drawn counter-clockwise starting 
+    # at the lower-left corner (0,0)
     $page.graphics: {
         .LineWidth = $stroke;
         .Rectangle($x, _pdf-y($page, $y) - $h, $w, $h);
         .Stroke;
     }
-}
+} # end of sub _rect
 
 sub _text(
     $pdf,
@@ -52,13 +55,16 @@ sub _text(
 
         .say: $txt;
     }
-}
+} # end of sub _text
 
-sub load-layout(Str $path --> Hash:D) is export(:load-layout) {
+sub load-layout(Str $path --> Hash:D) is export { #(:load-layout) {
     from-json $path.IO.slurp;
 }
 
 sub render-check(
+    # how do we identify the input data?
+    # need to enable easy private data for check
+    # layout and data
     Str :$outfile!, # = "output/sample-check.pdf",
     Hash :$layout!,
          :%data!,
@@ -81,7 +87,7 @@ sub render-check(
         micr_checkno => "1001"
     ),
 =end comment
-) is export(:render-check) {
+) is export { #(:render-check) {
 
     my $dir = $outfile.IO.dirname;
     $dir.IO.mkdir unless $dir.IO.e;
@@ -356,6 +362,38 @@ sub print-micre-line-style1(
         @box = .print: $mtext3;
     }
 } # end of sub print-micre-line-style1(
+
+#sub populate(IO::Path $dir, :$debug) is export {
+sub populate($dir, :$debug) is export {
+    unless $dir.IO.d {
+        die qq:to/HERE/;
+        FATAL: Unable to populate directory '$dir'.
+           Please file an issue with details.
+        HERE
+    }
+
+    # TODO check and ask the user to add private account info.
+    #   The default zero values must be filled before and personal
+    #   can be written!! Note there will be some exceptions:
+    #     + second name
+    #     + third address line
+
+    # copy the files from dir 'resources' into the dir.
+    # do NOT overwrite existing files
+    # remember to add the config.yml file, too (don't 
+    # forget its contents)
+    if $debug {
+        say "DEBUG: filling dir '$dir' with config files";
+    }
+} # sub populate
+
+sub get-next-check-number(
+    $account,
+    :$debug = False,
+) is export {
+    # the directory with zero or more used checks
+    my $cdir = "$*HOME/.SingleCheck/accounts/$account/checks";
+}
 
 =finish
 
