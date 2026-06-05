@@ -6,6 +6,8 @@
   "build-depends": [
   ],
   "depends": [
+    "JSON::Fast",
+    "JSON::Hjson",
     "Lingua::EN::Numbers:ver<2.8.3>"
   ],
   "description": "Provides examples of checks produced by module B<Checkwriter> which\nis a work in progress.\n",
