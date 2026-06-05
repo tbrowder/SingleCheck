@@ -3,6 +3,7 @@ unit module SinhleCheck::Utils;
 use JSON::Hjson;
 use JSON::Fast;
 use YAMLish;
+use Lingua::EN::Numbers;
 
 use PDF::API6;
 use PDF::Lite;

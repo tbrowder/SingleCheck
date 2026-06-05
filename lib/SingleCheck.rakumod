@@ -6,6 +6,8 @@ use PDF::Font::Loader :load-font;
 use PDF::Content::FontObj;
 use JSON::Fast;
 use Text::Utils :strip-comment;
+use Lingua::EN::Numbers;
+
 use SingleCheck::FontUtils;
 
 constant MICR-TRANSIT is export = chr(0x2446);
