@@ -191,6 +191,9 @@ sub render-check(
     _hline($page, :x(%p<signature_line><x>), :y(%p<signature_line><y>), 
            :w(%p<signature_line><w>), :stroke(%ln<stroke> // 0.5));
 
+    # draw a horizontal line along the cut line of the standard check paper
+    _hline($page, :x(), :y(), :w(8.5*72), 0.5);
+
     _text($pdf, $page, $%data<payee>, :x(%p<payee_line><x> + 2), :y(%p<payee_line><y> - 2), 
           :core-font('Helvetica'), :size(%f<field>));
     _text($pdf, $page, $%data<amount_num>, :x(%p<amount_box><x> + 4), :y(%p<amount_box><y> - 2),
