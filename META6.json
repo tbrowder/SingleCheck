@@ -6,7 +6,6 @@
   "build-depends": [
   ],
   "depends": [
-    "Checkwriter",
     "FontFactory::Type1",
     "JSON::Fast::Hyper",
     "JSON::Hjson",
