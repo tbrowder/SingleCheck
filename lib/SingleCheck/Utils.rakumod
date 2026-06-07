@@ -1,7 +1,7 @@
 unit module SinhleCheck::Utils;
 
 use JSON::Hjson;
-use JSON::Fast::Hyper;
+use JSON::Fast;
 use YAMLish;
 use Lingua::EN::Numbers;
 

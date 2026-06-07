@@ -4,7 +4,7 @@ use PDF::API6;
 use PDF::Page;
 use PDF::Font::Loader :load-font;
 use PDF::Content::FontObj;
-use JSON::Fast::Hyper;
+use JSON::Fast;
 use Text::Utils :strip-comment;
 use Lingua::EN::Numbers;
 

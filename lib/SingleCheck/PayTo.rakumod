@@ -1,7 +1,5 @@
 unit module SingleCheck::PayTo;
 
-use Checkwriter;
-
 # the entry sub
 sub pay-to($curdir, :$afil, :$cfil, :$debug) is export {
     # initialize data with defaults
