@@ -35,8 +35,8 @@ sub pay-to($curdir, :$afil, :$cfil, :$debug) is export {
     say "Preparing the check with your inputs...";
     if $debug {
         my $amount = %inputs<amount>;
-        my $f = Amount.new: :$amount;
-        say "DEBUG: amount is '{$f.amount}'";
+#       my $f = Amount.new: :$amount;
+#       say "DEBUG: amount is '{$f.amount}'";
     }
 
     my $df = $*FILE;
