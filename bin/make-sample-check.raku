@@ -1,6 +1,6 @@
 #!/usr/bin/env raku
 
-use JSON::Fast;
+use JSON::Fast::Hyper;
 
 use SingleCheck; # :render-check, :load-layout;
 

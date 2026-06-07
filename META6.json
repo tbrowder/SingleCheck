@@ -6,9 +6,23 @@
   "build-depends": [
   ],
   "depends": [
-    "JSON::Fast",
+    "Checkwriter",
+    "FontFactory::Type1",
+    "JSON::Fast::Hyper",
     "JSON::Hjson",
-    "Lingua::EN::Numbers:ver<2.8.3>"
+    "JSON::Tiny",
+    "Lingua::EN::Numbers",
+    "Lingua::EN::Numbers:ver<2.8.3>",
+    "PDF::API6",
+    "PDF::Content::Color",
+    "PDF::Content::FontObj",
+    "PDF::Font::Loader",
+    "PDF::Lite",
+    "PDF::Page",
+    "SingleCheck",
+    "SingleCheck::FontUtils",
+    "Text::Utils",
+    "YAMLish"
   ],
   "description": "Provides examples of checks produced by module B<Checkwriter> which\nis a work in progress.\n",
   "license": "Artistic-2.0",
